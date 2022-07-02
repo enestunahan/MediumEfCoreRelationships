@@ -9,13 +9,14 @@ namespace MediumEfCoreRelationships.Models
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) 
         {
         }
-
         public DbSet<Book> Books { get; set; }
-
+        public DbSet<BookDetail> BookDetails { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new BookConfiguration());
             modelBuilder.ApplyConfiguration(new BookSeedData());
+            modelBuilder.ApplyConfiguration(new BookDetailConfiguration());
+            modelBuilder.ApplyConfiguration(new BookDetailSeedData());
         }
     }
 }
