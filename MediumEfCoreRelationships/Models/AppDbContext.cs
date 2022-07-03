@@ -12,6 +12,8 @@ namespace MediumEfCoreRelationships.Models
         public DbSet<Book> Books { get; set; }
         public DbSet<BookDetail> BookDetails { get; set; }
         public DbSet<Author> Authors { get; set; }
+        public DbSet<Category> Categories { get; set; }
+        public DbSet<BookCategory> BookCategories { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new BookConfiguration());
@@ -19,7 +21,11 @@ namespace MediumEfCoreRelationships.Models
             modelBuilder.ApplyConfiguration(new BookDetailConfiguration());
             modelBuilder.ApplyConfiguration(new BookDetailSeedData());
             modelBuilder.ApplyConfiguration(new AuthorConfiguration());
-            modelBuilder.ApplyConfiguration(new AuthorSeedData());  
+            modelBuilder.ApplyConfiguration(new AuthorSeedData());
+            modelBuilder.ApplyConfiguration(new CategoryConfiguration());
+            modelBuilder.ApplyConfiguration(new CategorySeedData());
+            modelBuilder.ApplyConfiguration(new BookCategorySeedData());
+            modelBuilder.ApplyConfiguration(new BookCategoryConfiguration());
         }
     }
 }
