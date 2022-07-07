@@ -1,6 +1,5 @@
-﻿using MediumEfCoreRelationships.Configurations;
-using MediumEfCoreRelationships.SeedData;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
+using System.Reflection;
 
 namespace MediumEfCoreRelationships.Models
 {
@@ -16,16 +15,7 @@ namespace MediumEfCoreRelationships.Models
         public DbSet<BookCategory> BookCategories { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.ApplyConfiguration(new BookConfiguration());
-            modelBuilder.ApplyConfiguration(new BookSeedData());
-            modelBuilder.ApplyConfiguration(new BookDetailConfiguration());
-            modelBuilder.ApplyConfiguration(new BookDetailSeedData());
-            modelBuilder.ApplyConfiguration(new AuthorConfiguration());
-            modelBuilder.ApplyConfiguration(new AuthorSeedData());
-            modelBuilder.ApplyConfiguration(new CategoryConfiguration());
-            modelBuilder.ApplyConfiguration(new CategorySeedData());
-            modelBuilder.ApplyConfiguration(new BookCategorySeedData());
-            modelBuilder.ApplyConfiguration(new BookCategoryConfiguration());
+            modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
         }
     }
 }

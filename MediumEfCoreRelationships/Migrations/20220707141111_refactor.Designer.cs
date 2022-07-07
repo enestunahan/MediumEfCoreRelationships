@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MediumEfCoreRelationships.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20220702220914_AddAuthorTable")]
-    partial class AddAuthorTable
+    [Migration("20220707141111_refactor")]
+    partial class refactor
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -176,6 +176,121 @@ namespace MediumEfCoreRelationships.Migrations
                         });
                 });
 
+            modelBuilder.Entity("MediumEfCoreRelationships.Models.BookCategory", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int>("BookId")
+                        .HasColumnType("int");
+
+                    b.Property<short>("CategoryId")
+                        .HasColumnType("smallint");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2")
+                        .HasDefaultValueSql("GETDATE()");
+
+                    b.Property<bool>("IsDeleted")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false);
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BookId");
+
+                    b.HasIndex("CategoryId");
+
+                    b.ToTable("BookCategories");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            BookId = 1,
+                            CategoryId = (short)1,
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false
+                        },
+                        new
+                        {
+                            Id = 2,
+                            BookId = 1,
+                            CategoryId = (short)2,
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false
+                        },
+                        new
+                        {
+                            Id = 3,
+                            BookId = 2,
+                            CategoryId = (short)1,
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false
+                        },
+                        new
+                        {
+                            Id = 4,
+                            BookId = 2,
+                            CategoryId = (short)2,
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false
+                        },
+                        new
+                        {
+                            Id = 5,
+                            BookId = 3,
+                            CategoryId = (short)1,
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false
+                        },
+                        new
+                        {
+                            Id = 6,
+                            BookId = 3,
+                            CategoryId = (short)2,
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false
+                        },
+                        new
+                        {
+                            Id = 7,
+                            BookId = 4,
+                            CategoryId = (short)1,
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false
+                        },
+                        new
+                        {
+                            Id = 8,
+                            BookId = 4,
+                            CategoryId = (short)3,
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false
+                        },
+                        new
+                        {
+                            Id = 9,
+                            BookId = 5,
+                            CategoryId = (short)4,
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false
+                        },
+                        new
+                        {
+                            Id = 10,
+                            BookId = 5,
+                            CategoryId = (short)5,
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false
+                        });
+                });
+
             modelBuilder.Entity("MediumEfCoreRelationships.Models.BookDetail", b =>
                 {
                     b.Property<int>("Id")
@@ -276,6 +391,74 @@ namespace MediumEfCoreRelationships.Migrations
                         });
                 });
 
+            modelBuilder.Entity("MediumEfCoreRelationships.Models.Category", b =>
+                {
+                    b.Property<short>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("smallint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<short>("Id"), 1L, 1);
+
+                    b.Property<DateTime>("CreatedDate")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2")
+                        .HasDefaultValueSql("GETDATE()");
+
+                    b.Property<string>("Description")
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<bool>("IsDeleted")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false);
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Categories");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = (short)1,
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            Name = "Roman"
+                        },
+                        new
+                        {
+                            Id = (short)2,
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            Name = "Edebiyat"
+                        },
+                        new
+                        {
+                            Id = (short)3,
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            Name = "Fantastik"
+                        },
+                        new
+                        {
+                            Id = (short)4,
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            Name = "Akademik"
+                        },
+                        new
+                        {
+                            Id = (short)5,
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            Name = "Yazılım"
+                        });
+                });
+
             modelBuilder.Entity("MediumEfCoreRelationships.Models.Book", b =>
                 {
                     b.HasOne("MediumEfCoreRelationships.Models.Author", "Author")
@@ -285,6 +468,25 @@ namespace MediumEfCoreRelationships.Migrations
                         .IsRequired();
 
                     b.Navigation("Author");
+                });
+
+            modelBuilder.Entity("MediumEfCoreRelationships.Models.BookCategory", b =>
+                {
+                    b.HasOne("MediumEfCoreRelationships.Models.Book", "Book")
+                        .WithMany("BookCategories")
+                        .HasForeignKey("BookId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("MediumEfCoreRelationships.Models.Category", "Category")
+                        .WithMany("BookCategories")
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Book");
+
+                    b.Navigation("Category");
                 });
 
             modelBuilder.Entity("MediumEfCoreRelationships.Models.BookDetail", b =>
@@ -305,7 +507,14 @@ namespace MediumEfCoreRelationships.Migrations
 
             modelBuilder.Entity("MediumEfCoreRelationships.Models.Book", b =>
                 {
+                    b.Navigation("BookCategories");
+
                     b.Navigation("BookDetail");
+                });
+
+            modelBuilder.Entity("MediumEfCoreRelationships.Models.Category", b =>
+                {
+                    b.Navigation("BookCategories");
                 });
 #pragma warning restore 612, 618
         }

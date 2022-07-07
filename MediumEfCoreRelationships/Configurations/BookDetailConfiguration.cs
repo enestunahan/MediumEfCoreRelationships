@@ -1,27 +1,21 @@
 ﻿using MediumEfCoreRelationships.Models;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace MediumEfCoreRelationships.Configurations
 {
-    public class BookDetailConfiguration : IEntityTypeConfiguration<BookDetail>
-    {
-        public void Configure(EntityTypeBuilder<BookDetail> builder)
+    public class BookDetailConfiguration : CustomConfiguration<BookDetail,int>
+    {       
+        public override void Configure(EntityTypeBuilder<BookDetail> builder)
         {
-            builder.HasKey(x => x.Id);
+            base.Configure(builder);
 
             builder.Property(x => x.ISBN)
                 .IsRequired()
                 .HasMaxLength(20);
 
-            builder.Property(x=>x.IsDeleted).HasDefaultValue(false);
-            builder.Property(x => x.CreatedDate).HasDefaultValueSql("GETDATE()");
-
-            builder.HasOne(x=>x.Book)
+            builder.HasOne(x => x.Book)
                 .WithOne(x => x.BookDetail)
                 .HasForeignKey<BookDetail>(x=>x.BookId);
-
         }
-
     }
 }
